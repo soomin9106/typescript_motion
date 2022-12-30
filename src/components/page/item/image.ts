@@ -1,26 +1,24 @@
-export class ImageComponent {
-  private element: HTMLElement;
+import { BaseComponent } from "./../../component.js";
+
+export class ImageComponent extends BaseComponent<HTMLElement> {
   constructor(url: string, title: string) {
-    const template = document.createElement("template");
-    template.innerHTML = `<section class="image">
+    super(`<section class="image">
       <div class="img__holder">
           <img src="" alt="" class="img__thumbnail">
       </div>
       <p class="img__title"></p>
-    </section>`;
+    </section>`);
 
-    this.element = template.content.firstElementChild! as HTMLElement;
-
-    const imageElement = this.element.querySelector('.img__thumbnail')! as HTMLImageElement;
+    const imageElement = this.element.querySelector(
+      ".img__thumbnail"
+    )! as HTMLImageElement;
     imageElement.src = url;
     imageElement.alt = title;
 
-    const titleElement = this.element.querySelector('.img__title')! as HTMLParagraphElement;
+    const titleElement = this.element.querySelector(
+      ".img__title"
+    )! as HTMLParagraphElement;
     titleElement.textContent = title;
-  }
-
-  attachTo(parent: HTMLElement, position: InsertPosition = "afterbegin") {
-    parent.insertAdjacentElement(position, this.element);
   }
 }
 
@@ -38,3 +36,21 @@ export class ImageComponent {
 
 // this.element.appendChild(this.imgElement);
 // this.element.appendChild(this.titleElement);
+
+/** Using Template */
+// const template = document.createElement("template");
+//     template.innerHTML = `<section class="image">
+//       <div class="img__holder">
+//           <img src="" alt="" class="img__thumbnail">
+//       </div>
+//       <p class="img__title"></p>
+//     </section>`;
+
+//     this.element = template.content.firstElementChild! as HTMLElement;
+
+//     const imageElement = this.element.querySelector('.img__thumbnail')! as HTMLImageElement;
+//     imageElement.src = url;
+//     imageElement.alt = title;
+
+//     const titleElement = this.element.querySelector('.img__title')! as HTMLParagraphElement;
+//     titleElement.textContent = title;
