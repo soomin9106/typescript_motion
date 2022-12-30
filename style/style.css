@@ -1,0 +1,96 @@
+:root {
+    --bg-main-color:  #ffffff;
+    --bg-accent-color: #24a971;
+    --text-color-inside: #f0f0f0; 
+}
+
+li {
+    list-style: none;
+    padding-left: 0;
+}
+
+* {
+    outline: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-main-color);
+    font-family:"Kanit", sans-serif;
+    display: flex;
+    justify-content: center;
+    height: 100v;
+    overflow: hidden;
+    font-size: 1.25rem;
+    margin: 0;
+}
+
+.app {
+    width: 100%;
+    max-width: 1000px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.banner {
+    width: 100%;
+    background-color: var(--bg-accent-color);
+    border: var(--border-color);
+    border-bottom: 1px solid var(--bg-accent-color);
+    text-align: center;
+    border: none;
+}
+
+.banner__title {
+    margin: 20px;
+    color: var(--text-color-inside);
+}
+
+.banner__menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.create-button {
+    margin: 0.1em 0.3em;
+    text-align: center;
+    user-select: none;
+    padding: 1em 2em;
+    font-weight: 600;
+    color: var(--text-color-inside);
+    font-size: 0.8rem;
+    background-color: transparent;
+    border-radius: 16px;
+    border-color: var(--text-color-inside);
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.document {
+    height: 100%;
+    overflow-y: auto;
+    background-color: var(--bg-main-color);
+    /* Firefox */
+    scrollbar-width: 6px;
+    scrollbar-color: var(--bg-accent-color);
+    scrollbar-face-color: var(--accent-color);
+  }
+  
+  .document::-webkit-scrollbar {
+    /* Safari and Chrome */
+    background-color: var(--bg-accent-color);
+    width: 6px;
+  }
+  
+  .document::-webkit-scrollbar-thumb {
+    /* Safari and Chrome */
+    background-color: var(--accent-color);
+  }
+
+.footer {
+    background-color: var(--bg-main-color);
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+}
