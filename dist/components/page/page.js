@@ -7,11 +7,18 @@ export class PageItemComponent extends BaseComponent {
                 <button class="close">&times;</button>
               </div>
           </li>`);
+        const closeBtn = this.element.querySelector('.close');
+        closeBtn.onclick = () => {
+            this.closeListener && this.closeListener(); // closeListener 가 있다면 실행함
+        };
     }
     // 외부에서 item 전달
     addChild(child) {
         const container = this.element.querySelector('.page-item__body');
         child.attachTo(container);
+    }
+    setOnCloseListener(listener) {
+        this.closeListener = listener;
     }
 }
 export class PageComponent extends BaseComponent {
@@ -22,5 +29,8 @@ export class PageComponent extends BaseComponent {
         const item = new PageItemComponent();
         item.addChild(section);
         item.attachTo(this.element, 'beforeend');
+        item.setOnCloseListener(() => {
+            item.removeFrom(this.element);
+        });
     }
 }
