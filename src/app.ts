@@ -8,7 +8,7 @@ import { Composable, PageComponent, PageItemComponent } from "./components/page/
 class App {
   private readonly page: Component & Composable
   constructor(appRoot: HTMLElement) {
-    this.page = new PageComponent();
+    this.page = new PageComponent(PageItemComponent);
     this.page.attachTo(appRoot);
 
     const image = new ImageComponent("https://picsum.photos/100/100", "test image");
