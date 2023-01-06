@@ -1,8 +1,18 @@
-import { Composable } from "./../page/page.js";
+import { Composable } from "../page/page.js";
 import { BaseComponent, Component } from "./../component.js";
 
 type OnCloseListener = () => void;
 type OnSubmitListener = () => void;
+
+export interface MediaData {
+  readonly title: string;
+  readonly url: string;
+}
+
+export interface TextData {
+  readonly title: string;
+  readonly body: string;
+}
 
 export class InputDialog
   extends BaseComponent<HTMLElement>
@@ -28,7 +38,7 @@ export class InputDialog
       ".dialog__submit"
     )! as HTMLButtonElement;
     submitBtn.onclick = () => {
-      this.closeListener && this.closeListener(); // closeListener 가 있다면 실행함
+      this.submitListener && this.submitListener(); // submitListener 가 있다면 실행함
     };
   }
 
