@@ -1,10 +1,11 @@
 :root {
     --bg-main-color:  #ffffff;
     --bg-accent-color: #24a971;
-    --text-color-inside: #f0f0f0; 
-    --component-bg-gradient: #24a971;
+    --text-title-color: #3EECAC; 
+    --accent-color: #24a971;
     --border-color: #f6f6f7;
     --shadow-color: #dbdcdd;
+    --btn-color: #1e2f28;
 }
 
 li {
@@ -54,7 +55,7 @@ body {
     justify-content: center;
 }
 
-.create-button {
+.create-button, .dialog__submit {
     margin: 0.1em 0.3em;
     text-align: center;
     user-select: none;
@@ -75,13 +76,13 @@ body {
     background-color: var(--bg-main-color);
     /* Firefox */
     scrollbar-width: 6px;
-    scrollbar-color: var(--bg-accent-color);
+    scrollbar-color: var(--bg-main-color);
     scrollbar-face-color: var(--accent-color);
   }
   
   .document::-webkit-scrollbar {
     /* Safari and Chrome */
-    background-color: var(--bg-accent-color);
+    background-color: var(--bg-main-color);
     width: 6px;
     border-radius: 15px;
   }
@@ -120,8 +121,80 @@ body {
     padding: 0.4em;
     width: 32em;
     background: var(--bg-accent-color);
-    background: var(--component-bg-gradient);
-    border: 1px solid var(--border-color);
+    /* border: 1px solid var(--border-color); */
     border-radius: 0.5rem;
-    /* box-shadow: 2px 2px 20px var(--shadow-color); */
+}
+
+.form__container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+}
+
+.close {
+    align-self: flex-end;
+    color: var(--btn-color);
+    cursor: pointer;
+    border-style: none;
+    background-color: transparent;
+    font-size: 1em;
+}
+
+.dialog__submit {
+    align-self: flex-end;
+    padding: 0.5em 1.5em;
+    cursor: pointer;
+  }
+
+/* -- Page -- */
+
+.page-item {
+    margin: 1.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 2px 2px 6px var(--shadow-color);
+    border-radius: 0.5rem;
+}
+
+.page-item__body{
+    width: 100%;
+}
+
+.page-item__controls {
+    align-self: flex-start;
+    margin: 0.1em 0.3em;
+}
+
+.page-item__title {
+    color: var(--text-title-color)
+}
+
+/** Image */
+
+.video, .image {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+.img__thumbnail,
+.video__iframe {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.img__holder, 
+.video__player {
+    flex: 60% 1 1;
+}
+
+.img__title,
+.video__title {
+    flex: 40% 1 1;
+}
+
+.note,
+.todo {
+    padding: 0.5em;
 }

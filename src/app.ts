@@ -49,6 +49,15 @@ class App {
       MediaSectionInput,
       (input: MediaSectionInput) => new VideoCompoent(input.url, input.title)
     );
+
+    this.page.addChild(new ImageComponent('https://picsum.photos/800/400', 'Image Title'));
+    this.page.addChild(new VideoCompoent('https://youtu.be/D7cwvvA7cP0', 'Video Title'));
+    this.page.addChild(new NoteComponent('Note Title', "Don't forget to code your dream"));
+    this.page.addChild(new TodoComponent('Todo Title', 'TypeScript Course!'));
+    this.page.addChild(new ImageComponent('https://picsum.photos/800/400', 'Image Title'));
+    this.page.addChild(new VideoCompoent('https://youtu.be/D7cwvvA7cP0', 'Video Title'));
+    this.page.addChild(new NoteComponent('Note Title', "Don't forget to code your dream"));
+    this.page.addChild(new TodoComponent('Todo Title', 'TypeScript Course!'));
   }
 
   private bindElementToDialog<T extends (MediaData | TextData) & Component>(

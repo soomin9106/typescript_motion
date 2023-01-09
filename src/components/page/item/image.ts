@@ -6,7 +6,7 @@ export class ImageComponent extends BaseComponent<HTMLElement> {
       <div class="img__holder">
           <img src="" alt="" class="img__thumbnail">
       </div>
-      <h2 class="img__title"></p>
+      <h2 class="page-item__title img__title"></p>
     </section>`);
 
     const imageElement = this.element.querySelector(
