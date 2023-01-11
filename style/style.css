@@ -192,9 +192,34 @@ body {
 .img__title,
 .video__title {
     flex: 40% 1 1;
+    margin-left: 0.5rem;
 }
 
 .note,
 .todo {
     padding: 0.5em;
+}
+
+/* ---- Drag and Drop ---- */
+
+.mute-children * {
+    pointer-events: none;
+  }
+
+.lifted {
+    animation: drag_start 250ms;
+    opacity: 0.2;
+}
+
+@keyframes drag_start {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.2;
+    }
+  }
+
+.drag-area{
+    border: 2px solid var(--accent-color);
 }
