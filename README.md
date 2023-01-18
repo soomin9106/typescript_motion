@@ -3,6 +3,8 @@
 notion like application 
 You can upload image, youtube video, note, or to-do list from UI.
 
+It is implemented by typescript. Class-based OOP coding style is selected.
+
 ## Function
 - Upload : Upload content writing forms (ex. title, body)
 - Deleting : Delete contents that were written by user
