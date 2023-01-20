@@ -1,15 +1,21 @@
+import { EditDialog } from "../dialog/dialog.js";
 import { BaseComponent } from "./../component.js";
 export class PageItemComponent extends BaseComponent {
     constructor() {
         super(`<li draggable=true class="page-item">
               <section class="page-item__body"></section>
               <div class="page-item__controls">
-                <button class="close">&times;</button>
+                <button class="edit"><i class="fa-solid fa-pen"></i></button>
+                <button class="close"><i class="fa-solid fa-x"></i></button>
               </div>
           </li>`);
         const closeBtn = this.element.querySelector(".close");
         closeBtn.onclick = () => {
             this.closeListener && this.closeListener(); // closeListener 가 있다면 실행함
+        };
+        const editBtn = this.element.querySelector(".edit");
+        editBtn.onclick = () => {
+            this.editListener && this.editListener(); // editListener 가 있다면 실행함
         };
         this.element.addEventListener("dragstart", (event) => {
             this.onDragStart(event);
@@ -51,6 +57,9 @@ export class PageItemComponent extends BaseComponent {
     setOnCloseListener(listener) {
         this.closeListener = listener;
     }
+    setOnEditListener(listener) {
+        this.editListener = listener;
+    }
     setOnDragStateListener(listener) {
         this.dragStateListener = listener;
     }
@@ -83,11 +92,11 @@ export class PageComponent extends BaseComponent {
     }
     onDragOver(event) {
         event.preventDefault();
-        console.log("dragover", event);
+        // console.log("dragover", event);
     }
     onDrop(event) {
         event.preventDefault();
-        console.log("drop", event);
+        // console.log("drop", event);
         // 위치 변경 해주기
         if (!this.dropTarget) {
             return;
@@ -107,6 +116,19 @@ export class PageComponent extends BaseComponent {
         item.setOnCloseListener(() => {
             item.removeFrom(this.element);
             this.children.delete(item);
+        });
+        item.setOnEditListener(() => {
+            // edit event 실행
+            const beforeTitle = item.getTitle();
+            console.log(beforeTitle);
+            const editDialog = new EditDialog(beforeTitle);
+            editDialog.attachTo(document.body);
+            editDialog.setOnCloseListener(() => {
+                editDialog.removeFrom(document.body);
+            });
+            editDialog.setOnSubmitListener(() => {
+                // edit title here!
+            });
         });
         this.children.add(item);
         item.setOnDragStateListener((target, state) => {

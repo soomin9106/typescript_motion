@@ -1,3 +1,4 @@
+import { EditDialog } from "../dialog/dialog.js";
 import { BaseComponent, Component } from "./../component.js";
 
 // 모아서 조립하고 묶는다.
@@ -5,9 +6,11 @@ export interface Composable {
   addChild(child: Component): void;
 }
 type OnCloseListener = () => void;
+type OnEditListener = () => void;
 
 interface SectionContainer extends Component, Composable {
   setOnCloseListener(listener: OnCloseListener): void;
+  setOnEditListener(listener: OnEditListener): void;
   setOnDragStateListener(listener: OnDragStateListener<SectionContainer>): void;
   muteChildren(mode: 'mute' | 'unmute'): void;
   getBoundingRect(): DOMRect;
@@ -29,13 +32,15 @@ export class PageItemComponent
   implements SectionContainer
 {
   private closeListener?: OnCloseListener; // callback from outside
+  private editListener?: OnEditListener;
   private dragStateListener?: OnDragStateListener<PageItemComponent>;
 
   constructor() {
     super(`<li draggable=true class="page-item">
               <section class="page-item__body"></section>
               <div class="page-item__controls">
-                <button class="close">&times;</button>
+                <button class="edit"><i class="fa-solid fa-pen"></i></button>
+                <button class="close"><i class="fa-solid fa-x"></i></button>
               </div>
           </li>`);
 
@@ -43,6 +48,11 @@ export class PageItemComponent
     closeBtn.onclick = () => {
       this.closeListener && this.closeListener(); // closeListener 가 있다면 실행함
     };
+
+    const editBtn = this.element.querySelector(".edit")! as HTMLButtonElement;
+    editBtn.onclick = () => {
+      this.editListener && this.editListener(); // editListener 가 있다면 실행함
+    }
 
     this.element.addEventListener("dragstart", (event: DragEvent) => {
       this.onDragStart(event);
@@ -97,6 +107,10 @@ export class PageItemComponent
     this.closeListener = listener;
   }
 
+  setOnEditListener(listener: OnEditListener): void {
+    this.editListener = listener;    
+  }
+
   setOnDragStateListener(listener: OnDragStateListener<PageItemComponent>) {
     this.dragStateListener = listener;
   }
@@ -140,12 +154,12 @@ export class PageComponent
 
   onDragOver(event: DragEvent): void {
     event.preventDefault();
-    console.log("dragover", event);
+    // console.log("dragover", event);
   }
 
   onDrop(event: DragEvent): void {
     event.preventDefault();
-    console.log("drop", event);
+    // console.log("drop", event);
     // 위치 변경 해주기
     if(!this.dropTarget) {
       return;
@@ -170,6 +184,23 @@ export class PageComponent
       item.removeFrom(this.element);
       this.children.delete(item);
     });
+
+    item.setOnEditListener(() => {
+      // edit event 실행
+      const beforeTitle = item.getTitle();
+      console.log(beforeTitle);
+      
+      const editDialog = new EditDialog(beforeTitle);
+      editDialog.attachTo(document.body);
+
+      editDialog.setOnCloseListener(() => {
+        editDialog.removeFrom(document.body);
+      })
+
+      editDialog.setOnSubmitListener(() => {
+        // edit title here!
+      })
+    })
 
     this.children.add(item);
     item.setOnDragStateListener(

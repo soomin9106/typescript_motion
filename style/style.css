@@ -65,7 +65,7 @@ body {
     font-size: 0.8rem;
     background-color: transparent;
     border-radius: 16px;
-    border-color: var(--text-color-inside);
+    /* border-color: var(--text-color-inside); */
     cursor: pointer;
     text-transform: uppercase;
 }
@@ -94,7 +94,7 @@ body {
   }
 
 .footer {
-    background-color: var(--bg-main-color);
+    background-color: var(--bg-accent-color);
     border-top: 1px solid var(--border-color);
     text-align: center;
 }
@@ -131,13 +131,13 @@ body {
     margin-bottom: 1em;
 }
 
-.close {
+.close, .edit {
     align-self: flex-end;
     color: var(--btn-color);
     cursor: pointer;
     border-style: none;
     background-color: transparent;
-    font-size: 1em;
+    font-size: 0.7em;
 }
 
 .dialog__submit {
@@ -162,8 +162,10 @@ body {
 }
 
 .page-item__controls {
+    display: flex;
+    flex-direction: row;
     align-self: flex-start;
-    margin: 0.1em 0.3em;
+    margin: 0.3em 0.3em;
 }
 
 .page-item__title {
