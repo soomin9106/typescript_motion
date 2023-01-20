@@ -3,6 +3,7 @@ export interface Component {
   removeFrom(parent: HTMLElement): void;
   attach(component: Component, position?: InsertPosition): void;
   getTitle(): string;
+  setTitle(newTitle: string): void;
 }
 
 /** Encapsulate the HTML element creation */
@@ -12,6 +13,13 @@ export class BaseComponent<T extends HTMLElement> implements Component {
     const template = document.createElement("template");
     template.innerHTML = htmlString;
     this.element = template.content.firstElementChild! as T;
+  }
+  setTitle(newTitle: string): void {
+    const titleElement = this.element.querySelector('.page-item__title') as HTMLParagraphElement | null
+
+    if(titleElement !== null) {
+      titleElement.innerHTML = newTitle
+    } 
   }
   getTitle(): string {
     return this.element.querySelector('.page-item__title')?.innerHTML as string

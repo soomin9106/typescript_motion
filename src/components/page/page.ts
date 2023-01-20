@@ -199,6 +199,13 @@ export class PageComponent
 
       editDialog.setOnSubmitListener(() => {
         // edit title here!
+        const new_t = editDialog.getValue();
+        console.log(new_t); // new title 
+        
+        // set new title to item
+        item.setTitle(new_t);
+
+        editDialog.removeFrom(document.body);
       })
     })
 

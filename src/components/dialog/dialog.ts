@@ -66,7 +66,7 @@ export class EditDialog extends BaseComponent<HTMLElement>{
           <div id="dialog__body">
             <div class="form__container">
               <label for="title">Title</label>
-              <input type="text" id="title" value="${beforeTitle}" />
+              <input type="text" id="title" class="edit__title" value="${beforeTitle}" />
       </div>
           </div>
           <button class="dialog__submit">ADD</button>
@@ -86,9 +86,18 @@ export class EditDialog extends BaseComponent<HTMLElement>{
     };
   }
 
+  getValue() {
+    const valueElement = this.element.querySelector('.edit__title') as HTMLInputElement | null
+    if(valueElement !== null) {
+      return valueElement.value;
+    } else {
+      return ""
+    }
+  }
+
   setOnCloseListener(listener: OnCloseListener) {
     this.closeListener = listener;
-  }
+  } 
 
   setOnSubmitListener(listener: OnSubmitListener) {
     this.submitListener = listener;
